@@ -1,7 +1,5 @@
 package calculator;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 
@@ -17,8 +15,6 @@ public class CalculatorTest {
 //    }
 
 
-
-
 //    @ParameterizedTest(name = "throw exception if an expression is not separated by a space")
 //    @CsvSource({"1 + 2, 3", "1 + 2 / 3, 5"})
 //    void expressionSplitExceptionTest(String expression, int expected) {
@@ -26,10 +22,18 @@ public class CalculatorTest {
 //        assertThat(values.length).isEqualTo(expected);
 //    }
 
-    @Test
-    @CsvSource({"1 + 2, 3", "3 + 2, 5"})
-    void addTest(String expression, int expected) {
-        int result = new Calculator().add(expression);
+    @ParameterizedTest
+    @CsvSource({"1 + 2, 3", "1 - 2, -1", "1 + 1 + 1, 3", "3 * 2, 6", "4 / 2, 2"})
+    void calculatorTest(String expression, int expected) {
+        int result = new Calculator().calculate(expression);
         assertThat(result).isEqualTo(expected);
     }
+
+    @ParameterizedTest
+    @CsvSource({"1 + 2 - 1, 2", "1 - 2 * 2, -2", "2 + 4 / 2, 3"})
+    void calculatorTest2(String expression, int expected) {
+        int result = new Calculator().calculate(expression);
+        assertThat(result).isEqualTo(expected);
+    }
+
 }
